@@ -1,6 +1,6 @@
 const lib = require('lib')({token: process.env['ltoken']});
 
-const { Client, GatewayIntentBits, Partials } = require('discord.js');
+const { Client, Events, Collection,GatewayIntentBits, Partials } = require('discord.js');
 
 const client = new Client({
 
@@ -15,7 +15,7 @@ const client = new Client({
   ],
 
 });
-
+const command = new Collection ();
 client.on("ready", ()=>console.log("READY"));
 
 client.on(Events.InteractionCreate, async interaction => {
