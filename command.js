@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require('discord.js');
-
-const data = new SlashCommandBuilder()
+module.exports = {
+     data : new SlashCommandBuilder()
 	.setName('match')
 	.setDescription('Match Related commands')
         .addSubcommand(subcommand =>
@@ -12,5 +12,6 @@ const data = new SlashCommandBuilder()
 			.setDescription('Info about a match)
 
 			.addStringOption(option => option.setName('id').setDescription('Match Id').setAutocomplete(true)))
+		       }
 	
 	
