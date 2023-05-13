@@ -15,7 +15,7 @@ const client = new Client({
   ],
 
 });
-const command = new Collection ();
+client.commands = new Collection ();
 client.on("ready", ()=>console.log("READY"));
 
 client.on(Events.InteractionCreate, async interaction => {
