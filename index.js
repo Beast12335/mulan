@@ -16,6 +16,8 @@ const client = new Client({
 
 });
 client.commands = new Collection ();
+const slash = require('./command');
+slash(client) 
 client.on("ready", ()=>console.log("READY"));
 
 client.on(Events.InteractionCreate, async interaction => {
