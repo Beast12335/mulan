@@ -8,7 +8,7 @@ module.exports = {
     subcommand
       .setName('info')
       .setDescription('Info about the match')
-      .Autocomplete(true)),
+      .setAutocomplete(true)),
   async autocomplete(interaction) {
     const focusedValue = interaction.options.getFocused();
     const choices = ['Popular Topics: Threads', 'Sharding: Getting started', 'Library: Voice Connections', 'Interactions: Replying to slash commands', 'Popular Topics: Embed preview'];
