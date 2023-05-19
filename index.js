@@ -45,9 +45,9 @@ const { REST, Routes } = require('discord.js');
 
 const clientId  = process.env['ID']
 
-const fs = require('node:fs');
+//const fs = require('node:fs');
 
-const path = require('node:path');
+//const path = require('node:path');
 
 const token = process.env['TOKEN']
 
@@ -55,29 +55,29 @@ const commands = [];
 
 // Grab all the command folders from the commands directory you created earlier
 
-const foldersPath = path.join(__dirname, 'commands');
+const folderPath = path.join(__dirname, 'commands');
 
-const commandFolders = fs.readdirSync(foldersPath);
+const commandFolder = fs.readdirSync(folderPath);
 
-for (const folder of commandFolders) {
+for (const folder of commandFolder) {
 
 	// Grab all the command files from the commands directory you created earlier
 
-	const commandsPath = path.join(foldersPath, folder);
+	const commandPath = path.join(folderPath, folder);
 
-	const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
+	const commandFile = fs.readdirSync(commandPath).filter(file => file.endsWith('.js'));
 
 	// Grab the SlashCommandBuilder#toJSON() output of each command's data for deployment
 
-	for (const file of commandFiles) {
+	for (const file of commandFile) {
 
-		const filePath = path.join(commandsPath, file);
+		const filePath = path.join(commandPath, file);
 
-		const command = require(filePath);
+		const command1 = require(filePath);
 
-		if ('data' in command && 'execute' in command) {
+		if ('data' in command1 && 'execute' in command1) {
 
-			commands.push(command.data.toJSON());
+			commands.push(command1.data.toJSON());
 
 		} else {
 
