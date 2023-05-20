@@ -1,10 +1,10 @@
 const lib = require('lib')({token: process.env.STDLIB_SECRET_TOKEN});
-const {SlashCommandBuilder,EmbedBuilder} = require('discord.js');
+const {SlashCommandBuilder,EmbedBuilder, PermissionsBitField} = require('discord.js');
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('match-info')
     .setDescription('Shows info about a match(admin only)')
-    .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
+    .setDefaultMemberPermissions(PermissionsBitField.Flags.Administrator)
     .addStringOption((option) =>
       option
         .setName('match')
