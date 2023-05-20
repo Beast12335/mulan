@@ -134,7 +134,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
     if (!command) return;
 
     try {
-      await command.execute(interaction);
+      await command.autocomplete(interaction);
     } catch (error) {
       console.error(error);
       if (interaction.replied || interaction.deferred) {
