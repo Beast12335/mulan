@@ -9,7 +9,7 @@ module.exports = {
       option
         .setName('match')
         .setDescription('Choose the match')
-        .required(true)
+        .setRequired(true)
         .setAutocomplete(true)
     ),
   async autocomplete(interaction) {
