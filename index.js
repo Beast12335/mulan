@@ -127,7 +127,10 @@ client.once(Events.ClientReady, () => {
 });
 
 client.on(Events.InteractionCreate, async (interaction) => {
-  if (!interaction.isChatInputCommand()) continue;
+  if (interaction.isChatInputCommand()) {
+	  let command = client.commands.get(interaction.commandName)
+	  await command.execute(interaction)
+	  }
   else if (interaction.isAutocomplete()) {
     const command = client.commands.get(interaction.commandName);
 
