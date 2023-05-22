@@ -36,6 +36,7 @@ module.exports = {
       charset: `UTF8MB4`,
     });
     let t = b.result;
+    console.log(interaction)
     console.log(interaction.options);
     console.log(interaction.member);
     let embed = new EmbedBuilder()
