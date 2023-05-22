@@ -17,6 +17,7 @@ module.exports = {
         .setAutocomplete(true)
     ),
   async autocomplete(interaction) {
+    await interaction.deferReply()
     let a = await lib.mysql.db['@0.2.1'].query({
       query: `select id,teams from matches;`,
       charset: `UTF8MB4`,
@@ -30,7 +31,7 @@ module.exports = {
     );
   },
   async execute(interaction) {
-    await interaction.deferReply()
+    //await interaction.deferReply()
     let b = await lib.mysql.db['@0.2.1'].query({
       query: `select * from matches;`,
       charset: `UTF8MB4`,
