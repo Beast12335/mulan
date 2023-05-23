@@ -1,6 +1,6 @@
 const mysql = require('mysql2');
 const dotenv = require('dotenv');
-
+const fs = require('fs');
 // Read the contents of the .env file
 const envFile = fs.readFileSync('.env');
 
