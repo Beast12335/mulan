@@ -13,11 +13,11 @@ for (const key in envConfig) {
 }
 
 // create the connection to database
-module.exports.connection = {
+module.exports.connection = 
     async function connection (){
         mysql.createConnection({
             host: process.env['host'],
             user: process.env['user'],
             database: 'mulan'
 })
-}};
+};
