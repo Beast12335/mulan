@@ -4,6 +4,7 @@ const {
   EmbedBuilder,
   PermissionsBitField,
 } = require('discord.js');
+const connection = require('./db.js')
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('match-info')
@@ -17,11 +18,18 @@ module.exports = {
         .setAutocomplete(true)
     ),
   async autocomplete(interaction) {
-    let a = await lib.mysql.db['@0.2.1'].query({
+    /*let a = await lib.mysql.db['@0.2.1'].query({
       query: `select id,teams from matches;`,
       charset: `UTF8MB4`,
-    });
-    let match = a.result.map((item) => `${item.teams} (${item.id})`);
+    });*/
+    connection.query(
+  'SELECT * FROM `table` WHERE `name` = "Page" AND `age` > 45',
+  function(err, results, fields) {
+    console.log(results); // results contains rows returned by server
+    console.log(fields); // fields contains extra meta data about results, if available
+  }
+);
+   // let match = a.result.map((item) => `${item.teams} (${item.id})`);
     const focusedValue = interaction.options.getFocused();
 
     const filtered = match.filter((choice) => choice.startsWith(focusedValue));
