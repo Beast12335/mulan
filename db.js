@@ -14,9 +14,9 @@ for (const key in envConfig) {
 
 // create the connection to database
 module.exports.connection = {
-  /*const connection = */mysql.createConnection({
-    host: process.env['host'],
-    user: process.env['user'],
-    database: 'mulan'
+    mysql.createConnection({
+      host: process.env['host'],
+      user: process.env['user'],
+      database: 'mulan'
 });
 };
