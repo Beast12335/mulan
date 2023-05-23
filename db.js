@@ -13,7 +13,7 @@ for (const key in envConfig) {
 }
 
 // create the connection to database
-module.exports:{
+module.exports = {
   const connection = mysql.createConnection({
     host: process.env['host'],
     user: process.env['user'],
