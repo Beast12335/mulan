@@ -41,7 +41,7 @@ module.exports = {
     try{
         await interaction.deferReply()
         let b = await lib.mysql.db['@0.2.1'].query({
-          query: `select * from matches;`,
+          query: `show tables;`,
           charset: `UTF8MB4`,
         });
         //let t = b.result;
