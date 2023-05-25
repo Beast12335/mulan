@@ -17,6 +17,7 @@ const connection = mysql.createConnection({
             host: process.env['host'],
             password : process.env['password'],
             user: process.env['user'],
-            database: 'mulan'
+            database: 'mulan',
+            ssl={"rejectUnauthorized":true}
 });
 module.exports = connection
