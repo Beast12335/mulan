@@ -4,7 +4,7 @@ const {
   EmbedBuilder,
   PermissionsBitField,
 } = require('discord.js');
-const connection = require('../../db.js')
+//const connection = require('../../db.js')
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('match-info')
