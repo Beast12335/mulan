@@ -23,7 +23,7 @@ async function run() {
 
     // Query for a movie that has the title 'Back to the Future'
     const query = { teams: 'Test vs Naveen' };
-    const movie = await matches.findOne(query);
+    const movie = await movies.findOne(query);
 
     console.log(movie);
   } finally {
