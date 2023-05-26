@@ -125,7 +125,8 @@ const rest = new REST().setToken(token);
 client.once(Events.ClientReady, () => {
   console.log('Ready!');
 });
-
+const run = require('./db.js')
+run()
 client.on(Events.InteractionCreate, async (interaction) => {
   if (interaction.isChatInputCommand()) {
 	  let command = client.commands.get(interaction.commandName)
