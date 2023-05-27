@@ -1,6 +1,18 @@
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const fs = require('fs');
+const dotenv = require('dotenv');
+
+// Read the contents of the .env file
+const envFile = fs.readFileSync('.env');
+
+// Parse the contents into an object
+const envConfig = dotenv.parse(envFile);
+
+// Load the environment variables
+for (const key in envConfig) {
+  process.env[key] = envConfig[key];
+}
 const user = encodeURIComponent(process.env['user'])
 const password = encodeURIComponent(process.env['password'])
                      
