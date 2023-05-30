@@ -1,6 +1,7 @@
 const lib = require('lib')({token: process.env['Ltoken']});
 const fs = require('node:fs');
 const path = require('node:path');
+const mongoose = require('mongoose');
 const {Client, Collection, Events, GatewayIntentBits} = require('discord.js');
 //const {token} = require('./config.json');
 
@@ -126,7 +127,16 @@ client.once(Events.ClientReady, () => {
   console.log('Ready!');
 });
 const run = require('./db.js')
-run()
+mongoose
+    .connect(process.env.mongo)
+    .then(() => {
+      console.log("Successfully connected to the MongoDB Database");
+    })
+    .catch((err) => {
+      console.log(err);
+      console.log("Failed to connect to the MongoDB Database");
+    });
+});
 client.on(Events.InteractionCreate, async (interaction) => {
   if (interaction.isChatInputCommand()) {
 	  let command = client.commands.get(interaction.commandName)
