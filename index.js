@@ -136,7 +136,7 @@ mongoose
       console.log(err);
       console.log("Failed to connect to the MongoDB Database");
     });
-});
+
 client.on(Events.InteractionCreate, async (interaction) => {
   if (interaction.isChatInputCommand()) {
 	  let command = client.commands.get(interaction.commandName)
