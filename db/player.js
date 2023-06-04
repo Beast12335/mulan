@@ -19,5 +19,5 @@ const schema = new mongoose.Schema({
     required: true,
 }
 });
-const player = mongoose.model('claim',schema)
+const player = mongoose.model('player',schema)
 module.exports = player
