@@ -44,7 +44,7 @@ module.exports = {
     const focusedValue = interaction.options.getFocused();
     const c = await match.find();
     const choices = c.map((t) => {
-      return teams;
+      return t.teams;
     });
     const filtered = choices.filter((choice) =>
       choice.startsWith(focusedValue)
@@ -67,7 +67,7 @@ module.exports = {
         .setDescription('Match Stats added');
       await match.update(
         {teams: team},
-        {$set: {tags: tags, dc: dc, image1: image1, image2: image2}}
+        {$set: {tags: tags, dc: dc, img1: img1, img2: img2}}
       );
       await interaction.followUp({
         content: '',
