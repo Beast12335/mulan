@@ -21,7 +21,7 @@ module.exports = {
     try{
         console.log(interaction)
         let tea = interaction.options.getString('teams')
-        let a = await match.Create({
+        let a = await match.create({
             teams:tea
 });
         console.log('hello')
