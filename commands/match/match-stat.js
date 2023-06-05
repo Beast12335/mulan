@@ -59,10 +59,10 @@ module.exports = {
       let team = interaction.options.getString('teams');
       let tags = interaction.options.getString('tags');
       let dc = interaction.options.getString('dc');
-      let img1 = interaction.options.getAttachmrnt('image1');
-      let img2 = interaction.options.getAttachmrnt('image2');
+      let img1 = interaction.options.getAttachment('image1');
+      let img2 = interaction.options.getAttachment('image2');
       let embed = new EmbedBuilder()
-        .setTitle('')
+        .setTitle(' ')
         .setColor(0xffff00)
         .setDescription('Match Stats added');
       await match.update(
