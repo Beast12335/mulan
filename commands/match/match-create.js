@@ -32,7 +32,7 @@ module.exports = {
             embeds :[embed]
         });
     }catch(e){
-        let err = let embed = new EmbedBuilder()
+        let err = new EmbedBuilder()
       .setColor(0xffff11)
       .setTitle('Error')
       .setDescription(e);
