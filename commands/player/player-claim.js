@@ -4,6 +4,7 @@ const {
   PermissionsBitField,
 } = require('discord.js');
 const claim = require('../../db/claim.js')
+const cc = require ('../../coc.js')
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('player-claim')
