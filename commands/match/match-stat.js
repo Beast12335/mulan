@@ -65,9 +65,9 @@ module.exports = {
         .setTitle(' ')
         .setColor(0xffff00)
         .setDescription('Match Stats added');
-      await match.update(
+      await match.updateOne(
         {teams: team},
-        {$set: {tags: tags, dc: dc, img1: img1, img2: img2}}
+        {tags: tags, dc: dc, img1: img1, img2: img2}
       );
       await interaction.followUp({
         content: '',
