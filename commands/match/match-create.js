@@ -25,7 +25,7 @@ module.exports = {
 });
         let embed = new EmbedBuilder()
       .setColor(0xffff00)
-      .setTitle('')
+      .setTitle('Sucess')
       .setDescription('Match sucessfully created.');
         await interaction.followUp({
             content:'',
