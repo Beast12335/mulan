@@ -126,7 +126,6 @@ const rest = new REST().setToken(token);
 client.once(Events.ClientReady, () => {
   console.log('Ready!');
 });
-const run = require('./db.js')
 mongoose
     .connect(process.env.mongo)
     .then(() => {
