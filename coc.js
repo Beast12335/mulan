@@ -12,5 +12,7 @@ for (const key in envConfig) {
   process.env[key] = envConfig[key];
 }
 const client = new Client();
-const cc = await client.login({email: process.env.mail, password: process.env.password});
+async function (){
+  const cc = await client.login({email: process.env.mail, password: process.env.password});
+}
 module.exports = cc
