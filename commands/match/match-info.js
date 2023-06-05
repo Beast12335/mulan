@@ -33,7 +33,7 @@ module.exports = {
     await interaction.deferReply();
     try {
       let team = interaction.options.getString('teams');
-      let record = await match.findOne({teams:team.split(' vs ').join(',')});
+      let record = await match.findOne({teams:team});
       let players = record.tags
       let dc = record.dc
       let img = record.img1
