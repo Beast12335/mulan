@@ -42,4 +42,5 @@ module.exports = {
           embeds:[err]
       });
       }
+    },
 };
