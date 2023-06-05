@@ -12,19 +12,19 @@ module.exports = {
     .addStringOption((option) =>
       option
         .setName('teams')
-        .setDescription('Enter the team names')
+        .setDescription('Enter the team names sep by comma(,)')
         .setRequired(true)
     ),
   
   async execute(interaction) {
     await interaction.deferReply()
     try{
-        let tea = interaction.options.getString('teams')
+        let tea = interaction.options.getString('teams').split(',').join(' vs ')
         let a = await match.create({
             teams:tea
 });
         let embed = new EmbedBuilder()
-      .setColor(0x00ff00)
+      .setColor(0xffff00)
       .setTitle('')
       .setDescription('Match sucessfully created.');
         await interaction.followUp({
@@ -33,7 +33,7 @@ module.exports = {
         });
     }catch(e){
         let err = let embed = new EmbedBuilder()
-      .setColor(0x00ff00)
+      .setColor(0xffff11)
       .setTitle('Error')
       .setDescription(e);
       console.log(e)
