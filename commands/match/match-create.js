@@ -3,7 +3,7 @@ const {
   EmbedBuilder,
   PermissionsBitField,
 } = require('discord.js');
-const match = require ('./db/match.js')
+const match = require ('../././db/match.js')
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('match-create')
