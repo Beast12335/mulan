@@ -23,7 +23,7 @@ module.exports = {
     ),
   async execute(interaction) {
     await interaction.deferReply();
-    let search = interaction.getString('tag');
+    let search = interaction.getString('tag').toUpperCase();
     let regex = /^#[PYLQGRJCUV0289]+$/gm;
     let token = interaction.getString('token');
     try {
