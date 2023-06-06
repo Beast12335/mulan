@@ -34,8 +34,13 @@ module.exports = {
     try {
       let team = interaction.options.getString('teams');
       let record = await match.findOne({teams:team});
-      let players = record.tags
-      let dc = record.dc
+      let player = record.tags
+      let players = player.map((t)=>{
+        return t }).join('\n')
+      
+      let d = record.dc
+      let dc = d.map((t)=>{
+        return `<@`+t+`>` }).join('\n');
       let img = record.img1
       let img2 = record.img2
       let embed = new EmbedBuilder()
