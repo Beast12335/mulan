@@ -6,10 +6,10 @@ const schema = new mongoose.Schema({
     required: true,
   },
   tags: {
-    type: String,
+    type: [],
     },
   dc: {
-    type: String,
+    type: [],
     },
   img1:{
     type: String,
