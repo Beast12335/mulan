@@ -41,13 +41,14 @@ module.exports = {
       let embed = new EmbedBuilder()
         .setTitle('Match Info')
         .setColor(0x13ff00)
-        .setDescription(`Match : ${team}\n Players : ${players}\n Discord Id of Players : ${dc}`);
+        .setDescription(`Match : ${team}\n Players : ${players}\n`)
+        .addFields({name:`Discord Id of players`,value:dc,inline:true});
       await interaction.followUp({
         content: '',
         embeds: [embed],
       });
-      await channel.send({content:img})
-      await channel.send({content:img2})
+      await interaction.channel_id.send({content:img})
+      await interaction.channel_id.send({content:img2})
     } catch (e) {
       let embed = new EmbedBuilder()
         .setTitle('Error')
