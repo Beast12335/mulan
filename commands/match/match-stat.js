@@ -57,8 +57,8 @@ module.exports = {
     await interaction.deferReply();
     try {
       let team = interaction.options.getString('teams');
-      let tags = interaction.options.getString('tags');
-      let dc = interaction.options.getString('dc');
+      let tags = interaction.options.getString('tags').split(' ');
+      let dc = interaction.options.getString('dc').split(' ');
       let img1 = interaction.options.getAttachment('image1').url;
       let img2 = interaction.options.getAttachment('image2').url;
       let embed = new EmbedBuilder()
