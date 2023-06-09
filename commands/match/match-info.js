@@ -1,6 +1,6 @@
 const {
   SlashCommandBuilder,
-  EmbedBuilder, Client
+  EmbedBuilder, Client,
   PermissionsBitField,
 } = require('discord.js');
 const match = require('../../db/match.js');
