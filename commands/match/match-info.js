@@ -52,8 +52,9 @@ module.exports = {
         content: '',
         embeds: [embed],
       });
-      await interaction.channel_id.send({content:img})
-      await interaction.channel_id.send({content:img2})
+      const chnl = client.channels.cache.get(interaction.channel_id)
+      chnl.send({content:img})
+      chnl.send({content:img2})
     } catch (e) {
       let embed = new EmbedBuilder()
         .setTitle('Error')
