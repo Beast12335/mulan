@@ -55,7 +55,9 @@ module.exports = {
         content: '',
         embeds: [embed],
       });
+      console.log(interaction.channelId)
       const chnl = client.channels.cache.get(interaction.channelId)
+      console.log(chnl)
       chnl.send({content:img})
       chnl.send({content:img2})
     } catch (e) {
