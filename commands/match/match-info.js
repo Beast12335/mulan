@@ -4,7 +4,8 @@ const {
   PermissionsBitField,
 } = require('discord.js');
 const match = require('../../db/match.js');
-const client = new Client();
+//const client = new Client();
+const client = new Client({intents: [GatewayIntentBits.Guilds]});
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('match-info')
