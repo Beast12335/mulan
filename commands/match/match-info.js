@@ -54,8 +54,8 @@ module.exports = {
         embeds: [embed],
       });
       const chnl = interaction.channelId
-      chnl.send({content:img})
-      chnl.send({content:img2})
+      await chnl.send({content:img})
+      await chnl.send({content:img2})
     } catch (e) {
       let embed = new EmbedBuilder()
         .setTitle('Error')
