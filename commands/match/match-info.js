@@ -55,7 +55,7 @@ module.exports = {
         content: '',
         embeds: [embed],
       });
-     let int = interaction.channelId
+     let int = interaction.channel.id
       const chnl = client.channels.cache.get(`${int}`)
       chnl.send({content:img})
       chnl.send({content:img2})
