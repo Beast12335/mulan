@@ -19,7 +19,7 @@ module.exports = {
   async execute(interaction) {
     try{
         await interaction.deferReply()
-	    console.log(interaction)
+	   // console.log(interaction)
         //await wait(4000)
         await interaction.followUp('Pong')
     }catch(e){
