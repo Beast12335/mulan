@@ -1,6 +1,7 @@
 const {
   SlashCommandBuilder,
   EmbedBuilder, Client,
+  GarewayIntentBits,
   PermissionsBitField,
 } = require('discord.js');
 const match = require('../../db/match.js');
