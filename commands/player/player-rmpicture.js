@@ -20,7 +20,7 @@ module.exports = {
     const focusedValue = interaction.options.getFocused();
     const c = await player.find();
     const choices = c.map((t) => {
-      return t.teams;
+      return t.tag
     });
     const filtered = choices.filter((choice) =>
       choice.startsWith(focusedValue)
