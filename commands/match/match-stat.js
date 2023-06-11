@@ -77,7 +77,7 @@ module.exports = {
       let embed = new EmbedBuilder()
         .setTitle('Error')
         .setColor(0xffff11)
-        .setDescription(e);
+        .setDescription(e.message);
       await interaction.followUp({
         content: '',
         embeds: [embed],
