@@ -7,9 +7,9 @@ const player = require('../../db/player.js');
 const claim = require('../../db/claim.js')
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName('player-unclaim')
-    .setDescription('Remove claim from a player')
-    .setDefaultMemberPermissions(PermissionsBitField.Flags.Administrator)
+    .setName('player-picture')
+    .setDescription('Add a player image')
+    //.setDefaultMemberPermissions(PermissionsBitField.Flags.Administrator)
     .addStringOption((option) =>
       option
         .setName('tag')
@@ -42,7 +42,7 @@ module.exports = {
     try {
       let tag = interaction.getString('tag')
       let img = interaction.getAttachment('image').url
-      let tea = await player.updateOne({image:img,added: interaction.user.id,time:new Date()});
+      let tea = await player.create({tag:tag,image:img,added: interaction.user.id,time:new Date()});
       let embed = new EmbedBuilder()
         .setColor(0xffff00)
         .setTitle('Sucess')
