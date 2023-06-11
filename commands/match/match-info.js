@@ -56,7 +56,7 @@ module.exports = {
         embeds: [embed],
       });
      let int = interaction.channelId
-      const chnl = client.channels.fetch('860512303233236995')
+      const chnl = await client.channels.fetch('860512303233236995')
       console.log(chnl)
       chnl.send({content:img})
       chnl.send({content:img2})
@@ -64,7 +64,7 @@ module.exports = {
       let embed = new EmbedBuilder()
         .setTitle('Error')
         .setColor(0xff0000)
-        .setDescription(e);
+        .setDescription(e.message);
       await interaction.followUp({
         content: '',
         embeds: [embed],
