@@ -3,7 +3,7 @@ const {
   EmbedBuilder,
   PermissionsBitField,
 } = require('discord.js');
-const player = require('../../db/player.js');
+const player = require('../../db/claim.js');
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('player-unclaim')
@@ -19,7 +19,7 @@ module.exports = {
 
   async autocomplete(interaction) {
     const focusedValue = interaction.options.getFocused();
-    let t = await player.find()
+    let t = await player.find({user: interaction.user.id})
     const choices = t.map((u)=>{
       return u.tag })
     const filtered = choices.filter((choice) =>
@@ -47,7 +47,7 @@ module.exports = {
       let err = new EmbedBuilder()
         .setColor(0xffff11)
         .setTitle('Error')
-        .setDescription(e);
+        .setDescription(e.message);
       console.log(e);
       await interaction.followUp({
         content: '',
