@@ -62,7 +62,7 @@ module.exports = {
           }];
       await interaction.followUp({
         content: '',
-        embeds: [embed],
+        embeds: embed,
       });
     } catch (e) {
       let embed = new EmbedBuilder()
