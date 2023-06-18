@@ -34,7 +34,7 @@ module.exports = {
     await interaction.deferReply();
     try {
       let tag = interaction.options.getString('match')
-      let tea = await player.deleteOne({teams:match});
+      let tea = await match.deleteOne({teams:match});
       let embed = new EmbedBuilder()
         .setColor(0xffff00)
         .setTitle('Sucess')
