@@ -33,7 +33,7 @@ module.exports = {
   async execute(interaction) {
     await interaction.deferReply();
     try {
-      let tag = interaction.getString('match')
+      let tag = interaction.options.getString('match')
       let tea = await player.deleteOne({teams:match});
       let embed = new EmbedBuilder()
         .setColor(0xffff00)
