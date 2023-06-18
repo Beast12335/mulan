@@ -38,7 +38,7 @@ module.exports = {
       let embed = new EmbedBuilder()
         .setColor(0xffff00)
         .setTitle('Sucess')
-        .setDescription('Match `${match}` have deleted successfully.');
+        .setDescription('Match `${matc}` have deleted successfully.');
       await interaction.followUp({
         content: '',
         embeds: [embed],
