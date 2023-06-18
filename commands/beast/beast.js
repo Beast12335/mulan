@@ -21,8 +21,8 @@ module.exports = {
   async execute(interaction) {
     await interaction.deferReply();
     try {
-      let tag = interaction.getString('cmd')
-      let b = await tag
+      let tag = interaction.options.getString('cmd')
+      let b = tag
       let embed = new EmbedBuilder()
       .setTitle('Sucess')
       .setColor(0x13ff00)
