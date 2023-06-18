@@ -3,7 +3,7 @@ const {
   EmbedBuilder,
   PermissionsBitField,
 } = require('discord.js');
-const match = require('../../db/match.js');
+const matches = require('../../db/match.js');
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('match-delete')
@@ -34,7 +34,7 @@ module.exports = {
     await interaction.deferReply();
     try {
       let mat = interaction.options.getString('match').split(' vs ').join(' ');
-      let tea = await match.deleteOne({teams:mat});
+      let tea = await matches.deleteOne({teams:mat});
       let embed = new EmbedBuilder()
         .setColor(0xffff00)
         .setTitle('Sucess')
