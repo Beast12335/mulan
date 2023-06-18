@@ -19,7 +19,7 @@ module.exports = {
 
   async autocomplete(interaction) {
     const focusedValue = interaction.options.getFocused();
-    let t = await match.find()
+    let t = await matches.find()
     const choices = t.map((u)=>{
       return u.teams })
     const filtered = choices.filter((choice) =>
