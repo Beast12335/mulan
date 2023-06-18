@@ -33,12 +33,12 @@ module.exports = {
   async execute(interaction) {
     await interaction.deferReply();
     try {
-      let matc = interaction.options.getString('match').split(' vs ').join(' ');
-      let tea = await match.deleteOne({teams:matc});
+      let mat = interaction.options.getString('match').split(' vs ').join(' ');
+      let tea = await match.deleteOne({teams:mat});
       let embed = new EmbedBuilder()
         .setColor(0xffff00)
         .setTitle('Sucess')
-        .setDescription('Match `${matc}` have deleted successfully.');
+        .setDescription('Match '+ mat +' have deleted successfully.');
       await interaction.followUp({
         content: '',
         embeds: [embed],
