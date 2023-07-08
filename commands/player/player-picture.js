@@ -17,7 +17,7 @@ module.exports = {
         .setRequired(true)
         .setAutocomplete(true)
     )
-    .addStringOption((option) =>
+    .addAttachmentOption((option) =>
       option
         .setName('image')
         .setDescription('Upload the player picture')
