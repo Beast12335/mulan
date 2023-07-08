@@ -4,8 +4,12 @@ const {
   PermissionsBitField,
 } = require('discord.js');
 const claim = require('../../db/claim.js');
-const cc = require('../../coc.js');
-module.exports = {
+const {Client} = require('clashofclans.js')
+const client = new Client()
+const cc = await client.login({email: process.env.mail, password: process.env.password});
+/const cc = require('../../coc.js');
+console.log(cc)
+  module.exports = {
   data: new SlashCommandBuilder()
     .setName('player-claim')
     .setDescription('Claim a player')
@@ -28,7 +32,7 @@ module.exports = {
     let token = interaction.options.getString('token');
     try {
       if (regex.test(search) == true) {
-        let claim = await cc.verifyPlayerToken(search, token);
+        let claim = await cc.verifyPlayerToken(search,token);
         if (claim == true) {
           await claim.create({
             user: interaction.user.id,
