@@ -40,8 +40,8 @@ module.exports = {
   async execute(interaction) {
     await interaction.deferReply();
     try {
-      let tag = interaction.getString('tag')
-      let img = interaction.getAttachment('image').url
+      let tag = interaction.options.getString('tag')
+      let img = interaction.options.getAttachment('image').url
       let tea = await player.create({tag:tag,image:img,added: interaction.user.id,time:new Date()});
       let embed = new EmbedBuilder()
         .setColor(0xffff00)
