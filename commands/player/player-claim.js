@@ -6,9 +6,8 @@ const {
 const claim = require('../../db/claim.js');
 const {Client} = require('clashofclans.js')
 const client = new Client()
-const cc = await client.login({email: process.env.mail, password: process.env.password});
-/const cc = require('../../coc.js');
-console.log(cc)
+
+//const cc = require('../../coc.js');
   module.exports = {
   data: new SlashCommandBuilder()
     .setName('player-claim')
@@ -27,6 +26,9 @@ console.log(cc)
     ),
   async execute(interaction) {
     await interaction.deferReply();
+    const cc = await client.login({email: process.env.mail, password: process.env.password});
+    console.log(cc)
+
     let search = interaction.options.getString('tag').toUpperCase();
     let regex = /^#[PYLQGRJCUV0289]+$/gm;
     let token = interaction.options.getString('token');
