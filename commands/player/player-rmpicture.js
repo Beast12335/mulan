@@ -32,7 +32,7 @@ module.exports = {
   async execute(interaction) {
     await interaction.deferReply();
     try {
-      let tag = interaction.getString('tag')
+      let tag = interaction.options.getString('tag')
       await player.deleteOne({tag:tag})
       let embed = new EmbedBuilder()
       .setTitle('Sucess')
