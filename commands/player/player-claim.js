@@ -42,7 +42,7 @@ const client = new Client()
           });
           let embed = new EmbedBuilder()
             .setColor(0xffff00)
-            .setTitle('')
+            .setTitle(' ')
             .setDescription('Player sucessfully claimed.');
           await interaction.followUp({
             content: '',
