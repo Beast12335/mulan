@@ -34,8 +34,8 @@ const client = new Client()
     let token = interaction.options.getString('token');
     try {
       if (regex.test(search) == true) {
-        let claim = await client.verifyPlayerToken(search,token);
-        if (claim == true) {
+        let claims = await client.verifyPlayerToken(search,token);
+        if (claims == true) {
           await claim.create({
             user: interaction.user.id,
             tag: search,
