@@ -165,5 +165,13 @@ client.on(Events.InteractionCreate, async (interaction) => {
   }
 });
 
+const eventFiles = fs
+  .readdirSync('./events')
+  .filter((file) => file.endsWith('.js'));
+
+for (const file of eventFiles) {
+  const eventHandler = require(`./events/${file}`);
+  client.on(eventHandler.name, (...args) => eventHandler.execute(...args));
+}
 client.login(process.env['TOKEN']);
 module.exports = client;
