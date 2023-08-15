@@ -4,6 +4,7 @@ module.exports = {
   async execute(interaction) {
     if (!interaction.isButton()) return;
     if (interaction.customId !== 'th11') return;
+    await interaction.deferReply()
 
     try {
       const client = interaction.client;
