@@ -5,7 +5,7 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName('streamer-add')
     .setDescription('Add a streamer in db')
-    .addStringOption(option =>
+    .addUserOption(option =>
     option.setName('user')
       .setDescription('Choose the user')
       .setRequired(true))
@@ -18,9 +18,12 @@ module.exports = {
         .setDescription('Enter the streamer language')
         .setRequired(true)),
   async execute(interaction) {
+    await interaction.deferReply()
     try{
-        await interaction.deferReply()
-        const user = interaction.options.getString('user')
+      if(!interaction.member.permissions.has('ADMINISTRATOR')){
+        return await interaction.followUp({content:`You can't use this command.`});
+        }
+        const user = interaction.options.getUser('user')
         const tags = interaction.options.getString('tag')
         const language= interaction.options.getString('language')
         const a = await lib.googlesheets.query['@0.3.2'].insert({
@@ -33,8 +36,7 @@ module.exports = {
             }
           ]
         });
-        console.log(a)
-        await interaction.followUp('Pong')
+        await interaction.followUp('Streamer Info added in the sheet.')
     }catch(e){
         console.log(e)
     }
