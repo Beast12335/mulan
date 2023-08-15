@@ -8,7 +8,7 @@ module.exports = {
     try {
       const member = interaction.user.id
       const role = interaction.guild.roles.cache.find(x => x.id == `1140684315995418674`);
-      const channel = await client.guild.channels.cache.find(x => x.id == `1140617134913900545`)
+      const channel = await client.channels.fetch(`1140617134913900545`)
       if (!member.roles.cache.some(x => x.id == `1140684315995418674`)){
         await member.roles.add(role)
         await channel.send({content:`${interaction.user.username} wants to access TH11 tournaments.`});
