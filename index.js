@@ -170,7 +170,7 @@ const eventFiles = fs
   .filter((file) => file.endsWith('.js'));
 
 for (const file of eventFiles) {
-  const eventHandler = require(path.join(__dirname,events,file));
+  const eventHandler = require(path.join(__dirname,'events',file));
   client.on(eventHandler.name, (...args) => eventHandler.execute(...args));
 }
 client.login(process.env['TOKEN']);
