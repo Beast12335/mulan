@@ -15,7 +15,7 @@ module.exports = {
       await interaction.followUp({ content:`You can now access the TH14 tournament.Someone from staff will associate with the bot soon.`, ephemeral:true});
 
     } catch (error) {
-      console.error('Error handling th11 button interaction:', error);
+      console.error('Error handling th14 button interaction:', error);
     }
   },
 };
