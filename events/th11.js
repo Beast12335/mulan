@@ -1,4 +1,4 @@
-const client = require ('../index.js')();
+//const client = require ('../index.js');
 module.exports = {
   name: 'interactionCreate',
   async execute(interaction) {
@@ -6,6 +6,7 @@ module.exports = {
     if (interaction.customId !== 'th11') return;
 
     try {
+      const client = interaction.client;
       const member = interaction.user.id
       const role = interaction.guild.roles.cache.find(x => x.id == `1140684315995418674`);
       const channel = await client.channels.fetch(`1140617134913900545`)
