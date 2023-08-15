@@ -49,7 +49,7 @@ module.exports = {
     const embed = new EmbedBuilder()
       .setTitle('Tournament Access Setup')
       .setDescription('React on the buttons below to access tournaments')
-      .setColor('BLUE');
+      .setColor('Random');
 
     try {
       await interaction.channel.send({ embeds: [embed], components: [row] });
