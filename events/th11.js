@@ -18,7 +18,7 @@ module.exports = {
       else{
         await member.roles.remove(role)
         await channel.send({content:`Removed TH11 access from you.`, ephemeral:true});
-    } catch (error) {
+      }} catch (error) {
       console.error('Error handling th11 button interaction:', error);
     }
   },
