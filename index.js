@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const {Client, Collection, Events, GatewayIntentBits} = require('discord.js');
 //const {token} = require('./config.json');
 
-const client = new Client({intents: [GatewayIntentBits.Guilds]});
+const client = new Client({intents: [GatewayIntentBits.Guilds,GatewayIntentBits.GuildMembers,GatewayIntentBits.MessageContent]});
 
 const dotenv = require('dotenv');
 
