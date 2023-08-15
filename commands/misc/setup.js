@@ -21,27 +21,27 @@ module.exports = {
     const th11Button = new ButtonBuilder()
       .setCustomId('th11')
       .setLabel('TH11')
-      .setStyle('SUCCESS');
+      .setStyle('Success');
 
     const th12Button = new ButtonBuilder()
       .setCustomId('th12')
       .setLabel('TH12')
-      .setStyle('SUCCESS');
+      .setStyle('Success');
 
     const th14Button = new ButtonBuilder()
       .setCustomId('th14')
       .setLabel('TH14')
-      .setStyle('SUCCESS');
+      .setStyle('Success');
 
     const th15Button = new ButtonBuilder()
       .setCustomId('th15')
       .setLabel('TH15')
-      .setStyle('SUCCESS');
+      .setStyle('Success');
 
     const mixCupButton = new ButtonBuilder()
       .setCustomId('mix_cup')
       .setLabel('Mix Cup')
-      .setStyle('SUCCESS');
+      .setStyle('Success');
 
     const row = new ActionRowBuilder()
       .addComponents(th11Button, th12Button, th14Button, th15Button, mixCupButton);
