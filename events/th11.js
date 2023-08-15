@@ -7,7 +7,7 @@ module.exports = {
 
     try {
       const client = interaction.client;
-      const member = interaction.user
+      const member = interaction.member
       const role = interaction.guild.roles.cache.find(x => x.id == `1140684315995418674`);
       const channel = await client.channels.fetch(`1140617134913900545`)
       console.log(member)
