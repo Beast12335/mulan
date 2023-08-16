@@ -26,7 +26,7 @@ const client = new Client()
     ),
   async execute(interaction) {
     await interaction.deferReply();
-    const cc = await client.login({email: process.env.mail, password: process.env.password});
+    const cc = await client.login({email: process.env.email, password: process.env.password});
     console.log(cc)
 
     let search = interaction.options.getString('tag').toUpperCase();
