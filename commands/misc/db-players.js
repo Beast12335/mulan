@@ -14,8 +14,8 @@ module.exports = {
   async execute(interaction) {
     await interaction.deferReply()
     try{
-      const d = await claim.find({})
-      const data = await d.toArray()
+      const data = await claim.find({})
+      //const data = await d.toArray()
       const workbook = XLSX.utils.book_new();
       const worksheet = XLSX.utils.json_to_sheet(data);
       
