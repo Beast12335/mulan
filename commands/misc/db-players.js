@@ -4,7 +4,7 @@ const {
   PermissionsBitField,
 } = require('discord.js');
 const claim = require ('../../db/claim.js')
-const XLSX = require('xlsx')
+const { createWriteStream } = require('fs');
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('db-players')
@@ -14,16 +14,14 @@ module.exports = {
   async execute(interaction) {
     await interaction.deferReply()
     try{
-      const data = await claim.find()//.toArray()
-      const workbook = XLSX.utils.book_new();
-      const worksheet = XLSX.utils.json_to_sheet(data);
-      
-      // Add the worksheet to the workbook
-      XLSX.utils.book_append_sheet(workbook, worksheet, 'Player Claim Data');
-      
-      // Create a buffer from the workbook
-      const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'buffer' });
-      console.log(excelBuffer)
+      const x = await claim.find()
+      const csvData = x.map(player => `${player.user},${player.tag}`).join('\n');
+      const csvFilePath = 'players.csv';
+
+      const stream = createWriteStream(csvFilePath);
+      stream.write('User,Tag\n');
+      stream.write(csvData);
+      stream.end();
       let embed = new EmbedBuilder()
       .setColor(0xffff00)
       .setTitle('Sucess')
@@ -31,10 +29,7 @@ module.exports = {
         await interaction.followUp({
             content:'',
             embeds :[embed],
-            files:[{
-              attachment:excelBuffer,
-              name:'player_claim.xlsx'
-              }]
+            files:[csvFilePath]
         });
     }catch(e){
         let err = new EmbedBuilder()
