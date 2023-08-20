@@ -25,6 +25,7 @@ module.exports = {
       // Create a buffer from the workbook
       const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'buffer' });
       console.log(excelBuffer)
+      const exec = await writeFile('player_claim.xlsx',excelBuffer)
       let embed = new EmbedBuilder()
       .setColor(0xffff00)
       .setTitle('Sucess')
@@ -33,7 +34,7 @@ module.exports = {
             content:'',
             embeds :[embed],
             files:[{
-              attachment:excelBuffer,
+              attachment:exec,
               name:'player_claim.xlsx'
               }]
         });
