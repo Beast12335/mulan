@@ -5,6 +5,7 @@ const {
 } = require('discord.js');
 const claim = require ('../../db/claim.js')
 const { createWriteStream } = require('fs');
+const path = require('path')
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('db-players')
@@ -16,7 +17,7 @@ module.exports = {
     try{
       const x = await claim.find()
       const csvData = x.map(player => `${player.user},${player.tag}`).join('\n');
-      const csvFilePath = 'players.csv';
+      const csvFilePath = (__dirname,'players.csv');
 
       const stream = createWriteStream(csvFilePath);
       stream.write('User,Tag\n');
