@@ -32,7 +32,7 @@ module.exports = {
             content:'',
             embeds :[embed],
             files:[{
-              file:excelBuffer.toBuffer(),
+              attachment:excelBuffer,
               filename:'player_claim.xlsx'
               }]
         });
