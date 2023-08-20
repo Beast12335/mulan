@@ -5,6 +5,7 @@ const {
 } = require('discord.js');
 const claim = require ('../../db/claim.js')
 const XLSX = require('xlsx')
+const fs = require('fs')
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('db-players')
@@ -25,7 +26,7 @@ module.exports = {
       // Create a buffer from the workbook
       const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'buffer' });
       console.log(excelBuffer)
-      const exec = await writeFile('player_claim.xlsx',excelBuffer)
+      const exec = await fs.writeFile('player_claim.xlsx',excelBuffer)
       let embed = new EmbedBuilder()
       .setColor(0xffff00)
       .setTitle('Sucess')
