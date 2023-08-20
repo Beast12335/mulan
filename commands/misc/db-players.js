@@ -23,7 +23,8 @@ module.exports = {
       
       // Create a buffer from the workbook
       const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'buffer' });
-        let embed = new EmbedBuilder()
+      console.log(excelBuffer)
+      let embed = new EmbedBuilder()
       .setColor(0xffff00)
       .setTitle('Sucess')
       .setDescription('Match sucessfully created.');
