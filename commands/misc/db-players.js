@@ -33,7 +33,7 @@ module.exports = {
             embeds :[embed],
             files:[{
               attachment:excelBuffer,
-              filename:'player_claim.xlsx'
+              name:'player_claim.xlsx'
               }]
         });
     }catch(e){
