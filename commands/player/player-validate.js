@@ -40,7 +40,7 @@ module.exports = {
         
         const availableTagsEmbed = new EmbedBuilder()
           .setTitle('Claimed Tags')
-          .setDescription(availableTags.join('\n'))
+          .setDescription(availableTags.join('\n') || 'None')
           .setColor('#FFD700') // Yellowish color
           .setThumbnail(interaction.user.displayAvatarURL())
           .setFooter({
@@ -50,7 +50,7 @@ module.exports = {
         
         const unavailableTagsEmbed = new EmbedBuilder()
           .setTitle('Not Claimed Tags')
-          .setDescription(unavailableTags.join('\n'))
+          .setDescription(unavailableTags.join('\n') || 'None')
           .setColor('#FFD700') // Yellowish color
           .setThumbnail(interaction.user.displayAvatarURL())
           .setFooter({
@@ -60,7 +60,7 @@ module.exports = {
         
         const nonTagValuesEmbed = new EmbedBuilder()
           .setTitle('Invalid Values')
-          .setDescription(nonTagValues.join('\n'))
+          .setDescription(nonTagValues.join('\n') || 'None')
           .setColor('#FFD700') // Yellowish color
           .setThumbnail(interaction.user.displayAvatarURL())
           .setFooter({
