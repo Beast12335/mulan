@@ -24,7 +24,7 @@ module.exports = {
         const type = interaction.options.getString('sheet')
         if (type == 'Claims'){
           const claimed = await claim.find({})
-          console.log(claimed)
+         // console.log(claimed)
           for(let i=0;i<claimed.length;i++){
             let sheetData = await lib.googlesheets.query['@0.3.2'].select({
               range: `Claims!A:C`,
