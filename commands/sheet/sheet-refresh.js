@@ -24,18 +24,22 @@ module.exports = {
         const type = interaction.options.getString('sheet')
         if (type == 'Claims'){
           const claimed = await claim.find({})
-          const sheetData = await lib.googlesheets.query['@0.3.2'].select({
-            range: `Claims!A:C`,
-            bounds: 'FIRST_EMPTY_ROW',
-            where: [{}],
-            limit: {
-              'count': 0,
-              'offset': 0
-            }
-          });
           console.log(claimed)
           for(let i=0;i<claimed.length;i++){
-            if (!claimed[i].tag in sheetData.rows){
+            let sheetData = await lib.googlesheets.query['@0.3.2'].select({
+              range: `Claims!A:C`,
+              bounds: 'FIRST_EMPTY_ROW',
+              where: [
+                {
+                  'Tag__is': `${claimed[i].tag}`
+                }
+              ],
+              limit: {
+                'count': 0,
+                'offset': 0
+              }
+            });
+            if (sheetData.rows.length == 0){
               await lib.googlesheets.query['@0.3.2'].insert({
                 range: `Claims!A:C`,
                 fieldsets: [
@@ -51,17 +55,21 @@ module.exports = {
           }
         else if(type == 'Players'){
           const play = await player.find({})
-          const playerData = await lib.googlesheets.query['@0.3.2'].select({
-            range: `Players!A:C`,
-            bounds: 'FIRST_EMPTY_ROW',
-            where: [{}],
-            limit: {
-              'count': 0,
-              'offset': 0
-            }
-          });
           for(let i=0;i<play.length;i++){
-            if (!play[i].tag in playerData.rows){
+            let playerData = await lib.googlesheets.query['@0.3.2'].select({
+              range: `Players!A:E`,
+              bounds: 'FIRST_EMPTY_ROW',
+              where: [
+                {
+                  'Tag__is': `${play[i].tag}`
+                }
+              ],
+              limit: {
+                'count': 0,
+                'offset': 0
+              }
+            });
+            if (playerData.rows.length ==0){
               await lib.googlesheets.query['@0.3.2'].insert({
                 range: `Players!A:C`,
                 fieldsets: [
