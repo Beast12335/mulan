@@ -4,6 +4,7 @@ const {
   PermissionsBitField,
 } = require('discord.js');
 const claim = require ('../../db/claim.js')
+const player = require('../../db/player.js')
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('player-validate')
@@ -24,16 +25,25 @@ module.exports = {
         const availableTags = [];
         const unavailableTags = [];
         const nonTagValues = [];
+        const availablePlayers = [];
+        const nonPlayers = [];
         
         for (const tag of tagsArray) {
           if (tag.startsWith('#')) {
             const tagData = await claim.findOne({ tag });
+            const check = await player.findOne({tag});
             if (tagData) {
               availableTags.push(tag);
             } else {
               unavailableTags.push(tag);
             }
-          } else {
+          }
+            if(check){
+              availablePlayers.push(tag);
+            } else{
+              nonPlayers.push(tag)
+            }
+          else {
             nonTagValues.push(tag);
           }
         }
@@ -57,6 +67,28 @@ module.exports = {
             text: interaction.guild.name,
             iconURL: interaction.guild.iconURL(),
           });
+
+        
+        const availablePlayersEmbed = new EmbedBuilder()
+          .setTitle('Picture Added Players')
+          .setDescription(availablePlayers.join('\n') || 'None')
+          .setColor('#FFD700') // Yellowish color
+          .setThumbnail(interaction.user.displayAvatarURL())
+          .setFooter({
+            text: interaction.guild.name,
+            iconURL: interaction.guild.iconURL(),
+          });
+
+        
+        const nonPlayersEmbed = new EmbedBuilder()
+          .setTitle('Picture Not Saved')
+          .setDescription(nonPlayers.join('\n') || 'None')
+          .setColor('#FFD700') // Yellowish color
+          .setThumbnail(interaction.user.displayAvatarURL())
+          .setFooter({
+            text: interaction.guild.name,
+            iconURL: interaction.guild.iconURL(),
+          });
         
         const nonTagValuesEmbed = new EmbedBuilder()
           .setTitle('Invalid Values')
@@ -68,7 +100,8 @@ module.exports = {
             iconURL: interaction.guild.iconURL(),
           });
         
-        await interaction.followUp({ embeds: [availableTagsEmbed, unavailableTagsEmbed, nonTagValuesEmbed] });
+        await interaction.followUp({ embeds: [availableTagsEmbed, unavailableTagsEmbed, availablePlayersEmbed,nonPlayersEmbed] });
+        await interaction.channel.send({embeds:[nonTagValuesEmbed]});
         
     }catch(e){
         let err = new EmbedBuilder()
