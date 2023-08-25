@@ -37,12 +37,12 @@ module.exports = {
             } else {
               unavailableTags.push(tag);
             }
-          }
             if(check){
               availablePlayers.push(tag);
             } else{
               nonPlayers.push(tag)
             }
+          }
           else {
             nonTagValues.push(tag);
           }
