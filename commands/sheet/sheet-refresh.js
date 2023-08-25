@@ -1,7 +1,7 @@
 const lib = require('lib')({token: process.env.Ltoken});
 const { SlashCommandBuilder } = require('discord.js');
-const claim = require('../../claim.js')
-const player = require('../../player.js')
+const claim = require('../../db/claim.js')
+const player = require('../../db/player.js')
 
 module.exports = {
   data: new SlashCommandBuilder()
