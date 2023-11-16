@@ -40,6 +40,10 @@ const client = new Client()
             .setColor(0xffff00)
             .setTitle(' ')
             .setDescription('Player sucessfully claimed.');
+          const channel = interaction.client.channels.cache.get('1174574127445712937')
+          await channel.send({
+            content:`${user.displayName} (${user.id}) claimed ${search}`
+            });
           await interaction.followUp({
             content: '',
             embeds: [embed],
