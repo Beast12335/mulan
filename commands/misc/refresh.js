@@ -14,9 +14,9 @@ module.exports = {
   async execute(interaction) {
     await interaction.deferReply();
     try {
-      const data = await player.find()
+      const data = await claim.find()
       
-      const channel = interaction.client.channels.cache.get('1174574152947081277')
+      const channel = interaction.client.channels.cache.get('1174574127445712937')
       await data.forEach(async (item) => {
         await new Promise((resolve) => setTimeout(resolve, 450)); // Wait for 0.45 seconds
         await channel.send(item.toString());
