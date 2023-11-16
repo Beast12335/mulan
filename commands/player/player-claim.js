@@ -18,26 +18,22 @@ const client = new Client()
         .setDescription('Enter the player tag')
         .setRequired(true)
     )
-    .addStringOption((option) =>
+    .addUserOption((option) =>
       option
-        .setName('token')
-        .setDescription('Enter the api token found in game')
+        .setName('user')
+        .setDescription('Choose the owner of account')
         .setRequired(true)
     ),
   async execute(interaction) {
     await interaction.deferReply();
     const cc = await client.login({email: process.env.email, password: process.env.password});
-    console.log(cc)
-
     let search = interaction.options.getString('tag').toUpperCase();
     let regex = /^#[PYLQGRJCUV0289]+$/gm;
-    let token = interaction.options.getString('token');
+    let user = interaction.options.getUser('user');
     try {
       if (regex.test(search) == true) {
-        let claims = await client.verifyPlayerToken(search,token);
-        if (claims == true) {
-          await claim.create({
-            user: interaction.user.id,
+        await claim.create({
+            user: user.id,
             tag: search,
           });
           let embed = new EmbedBuilder()
@@ -48,16 +44,6 @@ const client = new Client()
             content: '',
             embeds: [embed],
           });
-        } else {
-          let embed = new EmbedBuilder()
-            .setColor(0xffff11)
-            .setTitle('Error')
-            .setDescription('Invalid API Token.');
-          await interaction.followUp({
-            content: '',
-            embeds: [embed],
-          });
-        }
       } else {
         let embed = new EmbedBuilder()
           .setColor(0xffff11)
