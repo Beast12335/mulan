@@ -41,7 +41,6 @@ module.exports = {
     try {
       let tag = interaction.options.getString('tag')
       let img = interaction.options.getAttachment('image').url
-      console.log(interaction.options.getAttachment('image'))
       let tea = await player.create({tag:tag,image:img,added: interaction.user.id,time:new Date()});
       let embed = new EmbedBuilder()
         .setColor(0xffff00)
@@ -49,7 +48,7 @@ module.exports = {
         .setDescription('Player picture saved successfully.');
       const channel = interaction.client.channels.cache.get('1174574152947081277')
       await channel.send({
-        content:`${tag}`,
+        content:`${tag} \n Added by: ${interaction.user.id} \n Image: ${img}`,
         });
       await interaction.followUp({
         content: '',
