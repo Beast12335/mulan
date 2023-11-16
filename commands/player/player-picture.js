@@ -9,7 +9,6 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName('player-picture')
     .setDescription('Add a player image')
-    //.setDefaultMemberPermissions(PermissionsBitField.Flags.Administrator)
     .addStringOption((option) =>
       option
         .setName('tag')
@@ -42,11 +41,16 @@ module.exports = {
     try {
       let tag = interaction.options.getString('tag')
       let img = interaction.options.getAttachment('image').url
+      console.log(interaction.options.getAttachment('image'))
       let tea = await player.create({tag:tag,image:img,added: interaction.user.id,time:new Date()});
       let embed = new EmbedBuilder()
         .setColor(0xffff00)
         .setTitle('Sucess')
         .setDescription('Player picture saved successfully.');
+      const channel = interaction.client.channels.cache.get('1174574152947081277')
+      await channel.send({
+        content:`${tag}`,
+        });
       await interaction.followUp({
         content: '',
         embeds: [embed],
