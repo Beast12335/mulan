@@ -9,7 +9,6 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName('player-validate')
     .setDescription('Check for claimed ids')
-    .setDefaultMemberPermissions(PermissionsBitField.Flags.Administrator)
     .addStringOption((option) =>
       option
         .setName('tags')
