@@ -51,7 +51,7 @@ module.exports = {
     const row = new ActionRowBuilder()
       .addComponents(th11Button, th12Button, th14Button, th15Button, mixCupButton);
 
-    const row2 = newActionRowBuilder()
+    const row2 = new ActionRowBuilder()
       .addComponents(th16Button);
     const embed = new EmbedBuilder()
       .setTitle('Tournament Access Setup')
