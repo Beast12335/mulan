@@ -43,16 +43,23 @@ module.exports = {
       .setLabel('Mix Cup')
       .setStyle('Success');
 
+    const th16Button = new ButtonBuilder()
+      .setCustomId('th16')
+      .setLabel('TH16')
+      .setStyle('Success');
+    
     const row = new ActionRowBuilder()
       .addComponents(th11Button, th12Button, th14Button, th15Button, mixCupButton);
 
+    const row2 = newActionBuilder()
+      .addComponents(th16Button);
     const embed = new EmbedBuilder()
       .setTitle('Tournament Access Setup')
       .setDescription('React on the buttons below to access tournaments')
       .setColor('Random');
 
     try {
-      await interaction.channel.send({ embeds: [embed], components: [row] });
+      await interaction.channel.send({ embeds: [embed], components: [row,row2] });
       await interaction.followUp({content:`Setup done`});
     } catch (error) {
       console.error(error);
