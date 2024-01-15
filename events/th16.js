@@ -13,7 +13,7 @@ module.exports = {
       if (!member.roles.cache.some(x => x.id == `1196059837323300864`)){
         await member.roles.add(role)
         await channel.send({content:`${interaction.user.username} wants to access TH16 tournaments.`});
-        await interaction.followUp({ content:`You can now access the TH11 tournament.Someone from staff will associate with the bot soon.`, ephemeral:true});
+        await interaction.followUp({ content:`You can now access the TH16 tournament.Someone from staff will associate with the bot soon.`, ephemeral:true});
       }
       else{
         await member.roles.remove(role)
