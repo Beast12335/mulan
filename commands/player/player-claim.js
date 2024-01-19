@@ -12,7 +12,7 @@ const client = new Client()
   data: new SlashCommandBuilder()
     .setName('player-claim')
     .setDescription('Claim a player')
-    .setDefaultMemberPermissions(PermissionsBitField.Flags.ManageServer)
+    .setDefaultMemberPermissions(PermissionsBitField.Flags.Administrator)
     .addStringOption((option) =>
       option
         .setName('tag')
