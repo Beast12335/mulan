@@ -32,10 +32,11 @@ module.exports = {
         const language= interaction.options.getString('language')
         const link = interaction.options.getString('link')
         const a = await lib.googlesheets.query['@0.3.2'].insert({
-          range: `A:D`,
+          range: `A:E`,
           fieldsets: [
             {
-              'Channel Name': user,
+              'Channel Name': user.username,
+              'Id':user.id
               'Link':link,
               'IG Profile': tags,
               'Language': language
