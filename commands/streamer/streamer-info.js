@@ -1,5 +1,5 @@
 const lib = require('lib')({token: process.env.Ltoken});
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder,EmbedBuilder } = require('discord.js');
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -16,12 +16,12 @@ module.exports = {
         return await interaction.followUp({content:`You can't use this command.`});
         }
         const user = interaction.options.getUser('user')
-        await lib.googlesheets.query['@0.3.2'].select({
+        const a = await lib.googlesheets.query['@0.3.2'].select({
           range: `A:E`,
           bounds: 'FIRST_EMPTY_ROW',
           where: [
             {
-              'User Id__is': `${user}`
+              'Id__is': `${user.id}`
             }
           ],
           limit: {
@@ -29,7 +29,11 @@ module.exports = {
             'offset': 0
           }
         });
-        await interaction.followUp('Streamer Info deleted from the sheet.')
+        let embed = new EmbedBuilder()
+      .setTitle('Streamer Info')
+      .setColor('Green')
+      .setDescription(a.id)
+        await interaction.followUp({embeds:[embed]})
     }catch(e){
         console.log(e)
         await interaction.followUp(e);
