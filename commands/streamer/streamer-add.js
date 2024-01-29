@@ -23,6 +23,7 @@ module.exports = {
         .setRequired(true)),
   async execute(interaction) {
     await interaction.deferReply()
+    console.log(interaction)
     try{
       if(!interaction.member.permissions.has('ADMINISTRATOR') || interaction.member.roles.includes('920927751576387674')){
         return await interaction.followUp({content:`You can't use this command.`});
