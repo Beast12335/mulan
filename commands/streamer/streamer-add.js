@@ -32,7 +32,7 @@ module.exports = {
         const language= interaction.options.getString('language')
         const link = interaction.options.getString('link')
         const a = await lib.googlesheets.query['@0.3.2'].insert({
-          range: `A:E`,
+          range: `streamers!A:E`,
           fieldsets: [
             {
               'Channel Name': user.username,
