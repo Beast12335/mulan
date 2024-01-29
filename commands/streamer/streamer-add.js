@@ -36,7 +36,7 @@ module.exports = {
           fieldsets: [
             {
               'Channel Name': user.username,
-              'Id':user.id
+              'Id':user.id,
               'Link':link,
               'IG Profile': tags,
               'Language': language
