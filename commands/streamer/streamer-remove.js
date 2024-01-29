@@ -12,12 +12,12 @@ module.exports = {
   async execute(interaction) {
     await interaction.deferReply()
     try{
-      if(!interaction.member.permissions.has('ADMINISTRATOR') || interaction.member.roles.include('920927751576387674')){
+      if(!interaction.member.permissions.has('ADMINISTRATOR') || interaction.member.roles.cache.has('920927751576387674')){
         return await interaction.followUp({content:`You can't use this command.`});
         }
         const user = interaction.options.getUser('user')
         await lib.googlesheets.query['@0.3.2'].delete({
-          range: `A:E`,
+          range: `streamers!A:E`,
           bounds: 'FIRST_EMPTY_ROW',
           where: [
             {
