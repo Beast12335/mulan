@@ -12,16 +12,16 @@ module.exports = {
   async execute(interaction) {
     await interaction.deferReply()
     try{
-      if(!interaction.member.permissions.has('ADMINISTRATOR')){
+      if(!interaction.member.permissions.has('ADMINISTRATOR') || interaction.member.roles.include('920927751576387674')){
         return await interaction.followUp({content:`You can't use this command.`});
         }
         const user = interaction.options.getUser('user')
         await lib.googlesheets.query['@0.3.2'].select({
-          range: `A:C`,
+          range: `A:E`,
           bounds: 'FIRST_EMPTY_ROW',
           where: [
             {
-              'Channel Name__is': `${user}`
+              'User Id__is': `${user}`
             }
           ],
           limit: {
@@ -32,7 +32,7 @@ module.exports = {
         await interaction.followUp('Streamer Info deleted from the sheet.')
     }catch(e){
         console.log(e)
-        await interaction.followUp({content:`Error using the command.`})
+        await interaction.followUp(e);
     }
   },
 };
