@@ -20,7 +20,7 @@ module.exports = {
   async execute(interaction) {
     await interaction.deferReply()
     try{
-      if(!interaction.member.permissions.has('ADMINISTRATOR')){
+      if(!interaction.member.permissions.has('ADMINISTRATOR') || interaction.member.roles.includes('920927751576387674')){
         return await interaction.followUp({content:`You can't use this command.`});
         }
         const user = interaction.options.getUser('user')
@@ -39,6 +39,7 @@ module.exports = {
         await interaction.followUp('Streamer Info added in the sheet.')
     }catch(e){
         console.log(e)
+        await interaction.followUp(e);
     }
   },
 };
