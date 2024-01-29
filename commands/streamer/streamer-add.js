@@ -10,6 +10,10 @@ module.exports = {
       .setDescription('Choose the user')
       .setRequired(true))
     .addStringOption(option =>
+      option.setName('link')
+      .setDescription('Enter the channel link')
+      .setRequired(true))
+    .addStringOption(option =>
       option.setName('tags')
         .setDescription('Enter the player tags')
         .setRequired(true))
@@ -26,11 +30,13 @@ module.exports = {
         const user = interaction.options.getUser('user')
         const tags = interaction.options.getString('tag')
         const language= interaction.options.getString('language')
+        const link = interaction.options.getString('link')
         const a = await lib.googlesheets.query['@0.3.2'].insert({
-          range: `A:C`,
+          range: `A:D`,
           fieldsets: [
             {
               'Channel Name': user,
+              'Link':link,
               'IG Profile': tags,
               'Language': language
             }
