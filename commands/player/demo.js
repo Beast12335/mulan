@@ -1,10 +1,6 @@
-const {
-  SlashCommandBuilder,
-  EmbedBuilder,
-  PermissionsBitField,
-} = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const player = require('../../db/player.js');
-const claim = require('../../db/claim.js')
+const claim = require('../../db/claim.js');
 const AWS = require('aws-sdk');
 AWS.config.update({
   accessKeyId: process.env.ACCESS_KEY_ID,
@@ -32,67 +28,46 @@ module.exports = {
 
   async autocomplete(interaction) {
     const focusedValue = interaction.options.getFocused();
-    let t = await claim.find({user: interaction.user.id})
-    const choices = t.map((u)=>{
-      return u.tag })
+    let t = await claim.find({ user: interaction.user.id });
+    const choices = t.map((u) => {
+      return u.tag;
+    });
     const filtered = choices.filter((choice) =>
       choice.startsWith(focusedValue)
     );
     await interaction.respond(
-      filtered.map((choice) => ({name: choice, value: choice}))
+      filtered.map((choice) => ({ name: choice, value: choice }))
     );
   },
 
   async execute(interaction) {
     await interaction.deferReply();
     try {
-      let tag = interaction.options.getString('tag')
-      let img = interaction.options.getAttachment('image').url
-      
+      let tag = interaction.options.getString('tag');
+      let img = interaction.options.getAttachment('image').url;
+
       const s3 = new AWS.S3();
-      const imageBuffer = Buffer.from(img.replace(/^data:image\/\w+;base64,/, ''), 'base64');
+      const imageBuffer = Buffer.from(
+        img.replace(/^data:image\/\w+;base64,/, ''),
+        'base64'
+      );
+
       const params = {
         Bucket: 'beast-db',
         Key: `${tag}.jpg`,
         Body: imageBuffer,
-        ContentType: 'image/jpg',
-        //ACL: 'public-read',
+        ContentType: 'image/jpeg',
       };
-      console.log(img)
-      console.log('\n')
-      console.log(imageBuffer)
-      s3.upload(params, (err, data) => {
-        if (err) {
-          console.error(err);
-          // Handle error response to the user
-        } else {
-          console.log(`Image uploaded successfully. URL: ${data.Location}`);
-          // Save data.Location (S3 URL) in your MongoDB for future retrieval
-        }
-      });
-      
-      let embed = new EmbedBuilder()
-        .setColor(0xffff00)
-        .setTitle('Sucess')
-        .setDescription('Player picture saved successfully.');
-      const channel = interaction.client.channels.cache.get('1174574152947081277')
-      await channel.send({
-        content:`${tag} \n Added by: ${interaction.user.id} \n Image: `,
-        });
-      await interaction.followUp({
-        content: '',
-        embeds: [embed],
-      });
+
+      // Upload the image to S3
+      const uploadResult = await s3.upload(params).promise();
+
+      console.log(`Image uploaded successfully. URL: ${uploadResult.Location}`);
+
+      // ... rest of your code ...
     } catch (e) {
-      let err = new EmbedBuilder()
-        .setColor(0xffff11)
-        .setTitle('Error')
-        .setDescription(e.message);
-      console.log(e);
-      await interaction.followUp({
-        content: '',
-        embeds: [err],
-      });
+      // Handle errors appropriately
+      console.error(e);
     }
   },
-}
+};
