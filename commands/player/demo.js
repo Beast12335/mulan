@@ -55,7 +55,7 @@ module.exports = {
         Bucket: 'beast-db',
         Key: `${tag}.jpg`,
         Body: imageBuffer,
-        ContentType: 'image/jpeg',
+        ContentType: 'image/jpg',
         //ACL: 'public-read',
       };
       console.log(img)
