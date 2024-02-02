@@ -56,7 +56,7 @@ module.exports = {
         Key: `${tag}.jpg`,
         Body: Buffer.from(img),
         ContentType: 'image/jpeg',
-        ACL: 'public-read',
+        //ACL: 'public-read',
       };
       
       s3.upload(params, (err, data) => {
