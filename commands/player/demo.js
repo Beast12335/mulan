@@ -2,6 +2,8 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const player = require('../../db/player.js');
 const claim = require('../../db/claim.js');
 const AWS = require('aws-sdk');
+const fs = require('fs');
+
 AWS.config.update({
   accessKeyId: process.env.ACCESS_KEY_ID,
   secretAccessKey: process.env.ACCESS_SECRET_KEY,
@@ -52,10 +54,14 @@ module.exports = {
         'base64'
       );
 
+      // Save the image locally
+      const localImagePath = 'temp-image.jpg';
+      fs.writeFileSync(localImagePath, imageBuffer);
+
       const params = {
         Bucket: 'beast-db',
         Key: `${tag}.jpg`,
-        Body: imageBuffer,
+        Body: fs.createReadStream(localImagePath),
         ContentType: 'image/jpeg',
       };
 
@@ -63,6 +69,9 @@ module.exports = {
       const uploadResult = await s3.upload(params).promise();
 
       console.log(`Image uploaded successfully. URL: ${uploadResult.Location}`);
+
+      // Delete the local image file
+      fs.unlinkSync(localImagePath);
 
       // ... rest of your code ...
     } catch (e) {
