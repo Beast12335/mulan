@@ -50,15 +50,17 @@ module.exports = {
       let img = interaction.options.getAttachment('image').url
       
       const s3 = new AWS.S3();
-      
+      const imageBuffer = Buffer.from(img.replace(/^data:image\/\w+;base64,/, ''), 'base64');
       const params = {
         Bucket: 'beast-db',
         Key: `${tag}.jpg`,
-        Body: Buffer.from(img),
+        Body: imageBuffer,
         ContentType: 'image/jpeg',
         //ACL: 'public-read',
       };
-      
+      console.log(img)
+      console.log('\n')
+      console.log(imageBuffer)
       s3.upload(params, (err, data) => {
         if (err) {
           console.error(err);
