@@ -1,6 +1,6 @@
 const {
   SlashCommandBuilder,
-  EmbedBuilder, AttachmentBuilder
+  EmbedBuilder, AttachmentBuilder,
   PermissionsBitField,
 } = require('discord.js');
 const player = require('../../db/player.js');
