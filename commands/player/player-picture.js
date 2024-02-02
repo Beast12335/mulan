@@ -41,6 +41,7 @@ module.exports = {
     try {
       let tag = interaction.options.getString('tag')
       let img = interaction.options.getAttachment('image').url
+      console.log(interaction.options.getAttachment('image'))
       let tea = await player.create({tag:tag,image:img,added: interaction.user.id,time:new Date()});
       let embed = new EmbedBuilder()
         .setColor(0xffff00)
