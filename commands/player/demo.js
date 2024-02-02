@@ -66,7 +66,7 @@ module.exports = {
           console.error(err);
           // Handle error response to the user
         } else {
-          console.log(`Image uploaded successfully. URL: ${data}`);
+          console.log(`Image uploaded successfully. URL: ${data.Location}`);
           // Save data.Location (S3 URL) in your MongoDB for future retrieval
         }
       });
