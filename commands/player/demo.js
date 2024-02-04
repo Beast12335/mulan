@@ -5,7 +5,13 @@ const fs = require('fs');
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('storeimage')
-    .setDescription('Store the uploaded image'),
+    .setDescription('Store the uploaded image')
+    .addAttachmentOption(option =>
+      option
+        .setName('image')
+        .setDescription('Upload the image')
+        .setRequired(true)
+    ),
 
   async execute(interaction) {
     await interaction.deferReply();
