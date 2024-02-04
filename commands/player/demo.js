@@ -1,12 +1,13 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { AttachmentBuilder } = require('discord.js');
+const https = require('https');
 const fs = require('fs');
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('storeimage')
     .setDescription('Store the uploaded image')
-    .addAttachmentOption(option =>
+    .addAttachmentOption((option) =>
       option
         .setName('image')
         .setDescription('Upload the image')
@@ -18,7 +19,9 @@ module.exports = {
 
     try {
       const imageAttachment = interaction.options.getAttachment('image');
-      const imageBuffer = await imageAttachment.toBuffer();
+
+      // Fetch the image and convert it to a buffer
+      const imageBuffer = await getImageBuffer(imageAttachment.url);
 
       // Generate a unique filename based on timestamp
       const timestamp = new Date().toISOString().replace(/:/g, '-');
@@ -43,3 +46,24 @@ module.exports = {
     }
   },
 };
+
+// Helper function to fetch an image and convert it to a buffer
+async function getImageBuffer(url) {
+  return new Promise((resolve, reject) => {
+    https.get(url, (response) => {
+      let data = [];
+
+      response.on('data', (chunk) => {
+        data.push(chunk);
+      });
+
+      response.on('end', () => {
+        resolve(Buffer.concat(data));
+      });
+
+      response.on('error', (error) => {
+        reject(error);
+      });
+    });
+  });
+}
