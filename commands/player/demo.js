@@ -18,7 +18,7 @@ module.exports = {
 
     try {
       const imageAttachment = interaction.options.getAttachment('image');
-      const imageBuffer = await imageAttachment.read();
+      const imageBuffer = await imageAttachment.toBuffer();
 
       // Generate a unique filename based on timestamp
       const timestamp = new Date().toISOString().replace(/:/g, '-');
