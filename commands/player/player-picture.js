@@ -1,70 +1,114 @@
-const {
-  SlashCommandBuilder,
-  EmbedBuilder,
-  PermissionsBitField,
-} = require('discord.js');
-const player = require('../../db/player.js');
-const claim = require('../../db/claim.js')
+const {SlashCommandBuilder} = require('@discordjs/builders');
+const {AttachmentBuilder} = require('discord.js');
+const https = require('https');
+const fs = require('fs');
+const AWS = require('aws-sdk');
+const {Client} = require('clashofclans.js');
+const client = new Client();
+
+AWS.config.update({
+  accessKeyId: process.env.ACCESS_KEY_ID,
+  secretAccessKey: process.env.ACCESS_SECRET_KEY,
+  region: 'ap-southeast-1', // replace with your AWS region
+});
+
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName('player-picture')
-    .setDescription('Add a player image')
+    .setName('storeimage')
+    .setDescription('Store the uploaded image')
     .addStringOption((option) =>
       option
         .setName('tag')
-        .setDescription('Choose the player')
+        .setDescription('Enter the player tag')
         .setRequired(true)
-        .setAutocomplete(true)
     )
     .addAttachmentOption((option) =>
       option
         .setName('image')
-        .setDescription('Upload the player picture')
+        .setDescription('Upload the image')
         .setRequired(true)
     ),
 
-  async autocomplete(interaction) {
-    const focusedValue = interaction.options.getFocused();
-    let t = await claim.find({user: interaction.user.id})
-    const choices = t.map((u)=>{
-      return u.tag })
-    const filtered = choices.filter((choice) =>
-      choice.startsWith(focusedValue)
-    );
-    await interaction.respond(
-      filtered.map((choice) => ({name: choice, value: choice}))
-    );
-  },
-
   async execute(interaction) {
     await interaction.deferReply();
+
     try {
-      let tag = interaction.options.getString('tag')
-      let img = interaction.options.getAttachment('image').url
-      console.log(interaction.options.getAttachment('image'))
-      let tea = await player.create({tag:tag,image:img,added: interaction.user.id,time:new Date()});
-      let embed = new EmbedBuilder()
-        .setColor(0xffff00)
-        .setTitle('Sucess')
-        .setDescription('Player picture saved successfully.');
-      const channel = interaction.client.channels.cache.get('1174574152947081277')
-      await channel.send({
-        content:`${tag} \n Added by: ${interaction.user.id} \n Image: ${img}`,
+      const imageAttachment = interaction.options.getAttachment('image');
+      const tag = interaction.options.getString('tag');
+      const cc = await client.login({
+        email: process.env.email,
+        password: process.env.password,
+      });
+      let search = tag.toUpperCase();
+      let regex = /^#[PYLQGRJCUV0289]+$/gm;
+      if (regex.test(search) == true) {
+        // Fetch the image and convert it to a buffer
+        const imageBuffer = await getImageBuffer(imageAttachment.url);
+
+        // Generate a unique filename based on timestamp
+        const timestamp = new Date().toISOString().replace(/:/g, '-');
+        const filename = `${tag}.jpg`;
+
+        // Save the image locally
+        fs.writeFileSync(filename, imageBuffer);
+
+        // Upload the image to S3
+        await uploadToS3(filename);
+
+        // Respond with a confirmation message and the saved image
+        await interaction.followUp({
+          content: `Player picture saved.`, // Adjust the message as needed
         });
-      await interaction.followUp({
-        content: '',
-        embeds: [embed],
-      });
-    } catch (e) {
-      let err = new EmbedBuilder()
-        .setColor(0xffff11)
-        .setTitle('Error')
-        .setDescription(e.message);
-      console.log(e);
-      await interaction.followUp({
-        content: '',
-        embeds: [err],
-      });
+
+        const channel = interaction.client.channels.cache.get(
+          '1204478327222571008'
+        );
+        await channel.send({
+          content: `${tag} \n Added by: ${interaction.user.id} \n Image: `,
+        });
+        await channel.send({content: `${imageAttachment.url}`});
+        fs.unlinkSync(filename);
+      } else {
+        await interaction.followUp('Invalid Player tag.');
+      }
+    } catch (error) {
+      console.error(error);
+      await interaction.followUp('Error storing the image.');
     }
   },
 };
+
+// Helper function to fetch an image and convert it to a buffer
+async function getImageBuffer(url) {
+  return new Promise((resolve, reject) => {
+    https.get(url, (response) => {
+      let data = [];
+
+      response.on('data', (chunk) => {
+        data.push(chunk);
+      });
+
+      response.on('end', () => {
+        resolve(Buffer.concat(data));
+      });
+
+      response.on('error', (error) => {
+        reject(error);
+      });
+    });
+  });
+}
+
+// Helper function to upload the image to AWS S3
+async function uploadToS3(filename) {
+  const s3 = new AWS.S3();
+  const fileContent = fs.readFileSync(filename);
+
+  const params = {
+    Bucket: 'beast-db',
+    Key: filename,
+    Body: fileContent,
+  };
+
+  await s3.upload(params).promise();
+}
