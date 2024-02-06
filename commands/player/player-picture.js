@@ -110,5 +110,6 @@ async function uploadToS3(filename) {
     Body: fileContent,
   };
 
-  await s3.upload(params).promise();
+  const x = await s3.upload(params).promise();
+  console.log(x)
 }
