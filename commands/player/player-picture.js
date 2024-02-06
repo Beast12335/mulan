@@ -14,8 +14,8 @@ AWS.config.update({
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName('storeimage')
-    .setDescription('Store the uploaded image')
+    .setName('player-picture')
+    .setDescription('Upload the picture for a player')
     .addStringOption((option) =>
       option
         .setName('tag')
