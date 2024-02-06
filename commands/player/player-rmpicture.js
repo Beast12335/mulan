@@ -22,8 +22,7 @@ module.exports = {
     await interaction.deferReply();
     try {
       let tag = interaction.options.getString('tag');
-      const file = interaction.options.getString('filename');
-      const filename = `${file}.jpg`;
+      const filename = `${tag}.jpg`;
       // Delete the image from S3
       await deleteFromS3(filename);
       let embed = new EmbedBuilder()
