@@ -17,7 +17,6 @@ module.exports = {
         .setName('tag')
         .setDescription('Enter the player tag')
         .setRequired(true)
-        .setAutocomplete(true)
     ),
   async execute(interaction) {
     await interaction.deferReply();
