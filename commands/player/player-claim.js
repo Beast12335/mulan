@@ -12,7 +12,6 @@ const client = new Client()
   data: new SlashCommandBuilder()
     .setName('player-claim')
     .setDescription('Claim a player')
-    .setDefaultMemberPermissions(PermissionsBitField.Flags.Administrator)
     .addStringOption((option) =>
       option
         .setName('tag')
@@ -27,6 +26,10 @@ const client = new Client()
     ),
   async execute(interaction) {
     await interaction.deferReply();
+    if (!interaction.member.permissions.has(PermissionsBitField.Flags.ADMINISTRATOR) || interaction.member.roles.cache.has('920927751576387674')) {
+        return await interaction.followUp({ content: 'You do not have permission to use this command.', ephemeral: true });
+      }
+
     const cc = await client.login({email: process.env.email, password: process.env.password});
     let search = interaction.options.getString('tag').toUpperCase();
     let regex = /^#[PYLQGRJCUV0289]+$/gm;
