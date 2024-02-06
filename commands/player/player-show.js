@@ -14,7 +14,7 @@ module.exports = {
     .setDescription('Shows the image of an player')
     .addStringOption((option) =>
     option
-      .setName('tags')
+      .setName('tag')
       .setDescription('Enter the player tag')
       .setRequired(true)
     ),
