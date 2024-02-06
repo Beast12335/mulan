@@ -31,7 +31,7 @@ module.exports = {
       const imageBuffer = await retrieveFromS3(filename);
 
       // Send the retrieved image to the Discord channel
-      await interaction.channel.send({
+      await interaction.followUp({
         content: `Here's the retrieved image:`,
         files: [new AttachmentBuilder(imageBuffer, filename)],
       });
