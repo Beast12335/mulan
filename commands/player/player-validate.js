@@ -51,7 +51,6 @@ module.exports = {
       for (const tag of tagsArray) {
         if (tag.startsWith('#')) {
           const tagData = await claim.findOne({ tag });
-          const check = await player.findOne({ tag });
           if (tagData) {
             availableTags.push(tag);
           } else {
