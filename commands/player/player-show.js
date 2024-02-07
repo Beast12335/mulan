@@ -53,5 +53,6 @@ async function retrieveFromS3(filename) {
   };
 
   const data = await s3.getObject(params).promise();
+  console.log(data);
   return data.Body;
 }
