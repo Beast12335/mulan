@@ -18,10 +18,9 @@ module.exports = {
       option.setName('sheet')
         .setDescription('Choose the sheet type')
         .setRequired(true)
-        .addChoices([
+        .addChoices(
           { name: 'Claims', value: 'Claims' },
-          { name: 'Players', value: 'Players' }
-        ])
+          { name: 'Players', value: 'Players' })
     ),
 
   async execute(interaction) {
