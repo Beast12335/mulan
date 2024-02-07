@@ -71,7 +71,7 @@ module.exports = {
             embed.setDescription('No files found in the bucket.');
           } else {
             files.forEach((file) => {
-              embed.addField(file.filename, file.link);
+              embed.addFields({name:file.filename, value:file.link});
             });
           }
 
