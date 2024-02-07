@@ -26,7 +26,7 @@ module.exports = {
   async execute(interaction) {
     await interaction.deferReply();
     try {
-      if (!interaction.member.permissions.has(PermissionsBitField.FLAGS.ADMINISTRATOR)) {
+      if (!interaction.member.permissions.has(PermissionsBitField.Flags.ADMINISTRATOR)) {
         return await interaction.followUp({ content: `You can't use this command.` });
       }
       const type = interaction.options.getString('sheet');
@@ -83,7 +83,7 @@ module.exports = {
       }
     } catch (e) {
       console.log(e);
-      await interaction.followUp({ content: e });
+      await interaction.followUp(e);
     }
   },
 };
