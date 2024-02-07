@@ -70,12 +70,18 @@ module.exports = {
           if (files.length === 0) {
             embed.setDescription('No files found in the bucket.');
           } else {
-            files.forEach((file) => {
-              embed.addFields({name:file.filename, value:file.link});
+            let fields = [];
+            files.forEach((file, index) => {
+              if (index % 25 === 0 && index !== 0) {
+                interaction.followUp({ embeds: [embed.setFields(fields)] });
+                fields = [];
+              }
+              fields.push({ name: file.filename, value: file.link });
             });
+            if (fields.length > 0) {
+              interaction.followUp({ embeds: [embed.setFields(fields)] });
+            }
           }
-
-          await interaction.followUp({ embeds: [embed] });
         } catch (error) {
           console.error('Error:', error);
           await interaction.followUp('An error occurred while listing files.');
